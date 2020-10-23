@@ -20,7 +20,7 @@ module.exports = {
         res.render('create', { layout: false });
     },
 
-    // postCreateBook(req, res, next) {
+    // postCreateBook(req, res, next) { 
     //     console.log(req.body);
         
     //     const { title, author, isbn } = req.params;

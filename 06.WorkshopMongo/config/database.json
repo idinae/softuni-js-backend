@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Gan356 Air SM",
+    "imageURL": "https://ae01.alicdn.com/kf/HTB1CSddXRxRMKJjy0Fdq6yifFXa6/Gan-356-Air-SM-3x3-Black-Magic-cube-GAN-Air-SM-Magnetic-3x3x3-Speed-cube-gans.jpg",
+    "difficultyLevel": 3,
+    "description": "Magnets in AirSM will not drop, and their positions will be more precise with the Magnets-Snap-On design. With the use of 3mm*2mm magnets, the handfeel will be more stable and more comfortable. P.S. This design is brand new for the AirSM."
+  },
+  {
+    "id": 2,
+    "name": "Eco-Dark",
+    "imageURL": "https://thingsidesire.com/wp-content/uploads/2018/06/Eco-Dark-Rubik%E2%80%99s-Cube2.jpg",
+    "difficultyLevel": 6,
+    "description": "EMPTY!"
+  },
+  {
+    "id": 3,
+    "name": "Pyraminx",
+    "imageURL": "https://images-na.ssl-images-amazon.com/images/I/61izOzq%2BBAL._SY355_.jpg",
+    "difficultyLevel": 1,
+    "description": "EMPTY!"
+  },
+  {
+    "id": 4,
+    "name": "Megaminx",
+    "imageURL": "https://images-na.ssl-images-amazon.com/images/I/61HpQqVQ37L._SY355_.jpg",
+    "difficultyLevel": 3,
+    "description": "EMPTY!"
+  },
+  {
+    "name": " Louvre Museum Rubik's cube",
+    "description": "The Victory of Samothrace, the Angel in adoration, the Mona Lisa, the Naked Young Man sitting by the sea, Venus and the graces offering gifts to a young girl and Psyche revived by the kiss of Love. An original Rubik's cube model with the flagship works of the Louvre Museum for all puzzle lovers!",
+    "imageURL": "https://www.boutiquesdemusees.fr/uploads/photos/2715/11767_xl.jpg",
+    "difficultyLevel": 2,
+    "id": 5
+  },
+  {
+    "name": "Rubik's Cube Junior Animal",
+    "description": "Come and take on a new kind of challenge made for the youngest Rubik's Cube fans. Twist and turn these crazy animals to create wacky mixed up characters, then keep twisting and turning until you solve the puzzle and turn them back into their original state.",
+    "imageURL": "https://media.4rgos.it/i/Argos/7239843_R_Z001A?w=1500&h=880&qlt=70&fmt=webp",
+    "difficultyLevel": 1,
+    "id": 6
+  },
+  {
+    "name": "CuberSpeed Yongjun YJ Axis",
+    "description": "The YJ Axis Cube V2 is the latest version of the classic 3x3 shape mod\r\nIt features an improved mechanism and design that appears to be adapted from the YJ SuLong, and it is stickered with the standard MoYu color scheme.\r\nSmoother and better turning, good quality and competitive price, MoYu shade stickers, absolutely a good choice for cube lovers:) Great cube for beginner.",
+    "imageURL": "https://images-na.ssl-images-amazon.com/images/I/71ueVZKxY8L._AC_SL1000_.jpg",
+    "difficultyLevel": 5,
+    "id": 7
+  },
+  {
+    "name": "CuberSpeed Twist 3x3 stickerelss Speed Cube",
+    "description": "The Twist Cube is a 3x3 shape mod that appears as if the yellow layer has been forcibly twisted 90 degrees relative to the white layer, distorting the other layers in the process. It features a vibrant stickerless bright color scheme.",
+    "imageURL": "https://images-na.ssl-images-amazon.com/images/I/51pjlV9U54L._AC_SL1100_.jpg",
+    "difficultyLevel": 3,
+    "id": 8
+  }
+]
