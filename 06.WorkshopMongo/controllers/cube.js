@@ -11,17 +11,17 @@ module.exports = {
         };
 
         cubeModel.find(query).lean().then(cubes => {
-          res.render('index', { layout: false, cubes, from, search, to });
+          res.render('index', { cubes, from, search, to });
         }).catch(next); 
     },
     getCube(req, res, next) {
         const id = req.params.id;
         return cubeModel.findById(id).then(cube => {
-            res.render('details', { layout: false, cube });
+            res.render('details', { cube });
         }).catch(next);
     },
     getCreateCube(req, res) {
-        res.render('create', { layout: false });
+        res.render('create');
     },
     postCreateCube(req, res, next) {
         const { name, description, imageURL, difficultyLevel } = req.body;

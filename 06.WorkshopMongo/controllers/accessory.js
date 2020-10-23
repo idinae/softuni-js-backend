@@ -7,7 +7,7 @@ module.exports = {
         .catch(next);
     },
     getCreateAccessory(_, res) {
-        res.render('create-accessory', { layout: false });
+        res.render('create-accessory');
     },
     postAttachAccessory(req, res, next) {
         const { name, description, imageURL } = req.body;

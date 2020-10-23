@@ -6,10 +6,10 @@ module.exports = (app) => {
   app.get('/create', cubeController.getCreateCube);
   app.post('/create', cubeController.postCreateCube);
   app.get('/about', function(req, res) {
-    res.render('about', { layout: false });
+    res.render('about');
   });
 
   app.get('*', function(req, res) {
-    res.render('404', { layout: false });
+    res.render('404');
   });
 }; 
