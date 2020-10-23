@@ -1,0 +1,55 @@
+1. Настройки на средата - npm init; npm install express mongoose body-parser
+2. Пускане на сървър - в app.js
+3. Създаване на book.model Schema - в Book.model.js, откъдето се експортва
+4. В app.js - require Book.model
+5. Създаваме връзка към базата - преди да стартираме сървъра, стартираме mongo през терминала на NodeJS
+   ! Можем да се свържем и през cmd-терминала към базата
+   ! Когато създадем схема, MongoDB автоматично прави името на схемата в мн.ч. и създава такава колекция
+6. Добавяме routes чрез express и mongoose методи, за да можем да вземем:
+    - книгите от базата - с Book.find({})
+    - конкретна книга от базата - с Book.findOne({_id: req.params.id})
+7. Създаваме рутиране и ф-ции за create, update, delete на книги - тук ще ползваме body-parser: първо добавяме app.use(bodyParser.json());
+    - създаване
+      a/ чрез Book.create({}, function() {})
+      б/ чрез променлива, реферираща към схемата: var newBook = new Book() и newBook.title = req.body.title...
+         като пращаме заявката през Postman, избираме: Body - x-www-form-urlencoded - и пишем Key-Value двойки
+8. Update на книга - заявката към Mongo е Book.findOneAndUpdate([conditions], [update], [options], [callback])
+9. Delete на книга - Book.findOneAndRemove(conditions, [options], [callback])
+
+
+
+
+//Пример
+
+'use strict';
+
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+var BookSchema = new Schema({
+    title: String,
+    /* title: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    published: {
+        type: Date,
+        default: Date.now
+    } */
+    keywords: Array,
+    published: Boolean,
+    author: {
+        type: Schema.ObjectId, //or Schema.Type.ObjectId
+        ref: 'User'
+    },
+    //Embedded sub-document
+    detail: {
+        modelNumber: Number,
+        hardcover: Boolean,
+        reviews: Number,
+        rank: Number
+    }
+});
+
+module.exports = mongoose.model('Book', BookSchema);
