@@ -10,12 +10,13 @@
   <div class="accessories">
     {{#each cube.accessories}}
     <div class="accessory">
-      <img src="{{imageURL}}" alt="stickerName">
+      <img src="{{imageURL}}" alt="stickerName" />
       <h3>{{name}}</h3>
       <p>{{description}}</p>
     </div>
     {{else}}
     <h3 class="italic">This cube has no accessories yet...</h3>
     {{/each}}
+    <a href="/attach/accessory/{{cube._id}}" class="btn">Add accessory</a>
   </div>
 </main>

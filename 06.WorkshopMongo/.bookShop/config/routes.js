@@ -1,6 +1,6 @@
 const bookController = require('../controllers/book');
 const bodyParser = require('body-parser');
-const urlencodedParser = bodyParser.urlencoded({ extended: false })
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 module.exports = (app) => {
   app.get('/', bookController.getBooks);

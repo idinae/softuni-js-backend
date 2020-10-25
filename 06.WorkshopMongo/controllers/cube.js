@@ -10,13 +10,14 @@ module.exports = {
             query.difficultyLevel.$lte = +to;
         };
 
-        cubeModel.find(query).lean().then(cubes => {
-          res.render('index', { cubes, from, search, to });
+        cubeModel.find(query).populate('accessories')
+            .lean().then(cubes => {
+            res.render('index', { cubes, from, search, to });          
         }).catch(next); 
     },
     getCube(req, res, next) {
         const id = req.params.id;
-        return cubeModel.findById(id).then(cube => {
+        return cubeModel.findById(id).populate('accessories').lean().then(cube => {
             res.render('details', { cube });
         }).catch(next);
     },
