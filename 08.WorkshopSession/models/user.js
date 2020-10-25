@@ -12,4 +12,8 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+userSchema.methods.matchPassword = function () {
+    
+}
+
 module.exports = new mongoose.model('cube', userSchema);
