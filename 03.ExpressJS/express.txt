@@ -1,0 +1,5 @@
+//in the current folder
+npm init
+npm i express
+npm i express-handlebars
+

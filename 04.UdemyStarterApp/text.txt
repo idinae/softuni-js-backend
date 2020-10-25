@@ -1,0 +1,32 @@
+1. Конфигуриране на средата
+   - npm init -> "main": "app.js"
+   - npm install express -> npm i --save express
+2. Правим app.js файла - пуска сървъра
+   - const express = require('express')
+   - const app = express()
+   - const port = 8000
+   - app.listen(port) или с callback: app.listen(port, function(err, res) {})
+3. Добавяме папката .vscode и правим папката workspace folder
+
+
+
+
+! npm i nodemon - ако искаме автоматично да се рестартира сървърът след всяка промяна
+
+! подредба на app.js:
+   1/ модулите, които се импортват, напр. var path = require('path')
+   2/ променливи, указващи къде ще се създава рутирането, напр. var routes = require('./routes/index')
+   3/ променлива app = express(), за да може приложението да ползва методите на експрес
+   4/ app.set(), напр. app.set('view engine', 'hbs') - дефинира темплейтинга и къде са файловете с view-та
+      * ако ползваме handlebars, swig - трябва да декларираме и енджина, който ще ползваме:
+      app.engine('hbs', handlebars({ layoutsDir: __dirname + '/views/layouts' }));
+   5/ всичко останало, което ползваме, е middleware, напр. app.use(...) - bodyParser.urlencoded, express.static... и т.н.
+      * middleware - всички ф-ции, извиквани от express js routing layer, преди да завърши обработката на заявката
+   6/ накрая се дефинират routes: app.use('/', routes)
+
+! Middleware - use next()
+  - CORS Middleware
+  - CSRF Middleware
+  - Auth Middleware
+  - Main Task
+ 

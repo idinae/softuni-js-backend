@@ -1,0 +1,5 @@
+{
+    "port": 3000,
+    "viewsDir": "web/01.NodeJS/catShelter/views",
+    "staticFilesDir": "web/01.NodeJS/catShelter/content"
+}
