@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = reqire('bcrypt');
+const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
 const userSchema = new mongoose.Schema({
@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
 });
 
 //проверяваме дали изпратената парола отговаря на текущата
-userSchema.methods.matchPassword = function (providedPassword) {
+userSchema.methods.comparePasswords = function (providedPassword) {
     return new Promise((resolve, reject) => {
         bcrypt.compare(providedPassword, this.password, function (err, result) {
             if (err) { reject (err); return; }
@@ -31,7 +31,8 @@ userSchema.pre('save', function (done) { //hook - правим нещо, пре�
             if (err) { done(err); return; }
             bcrypt.hash(this.password, salt, (err, hash) => {
                 if (err) { done(err); return; }
-                this.password = hash;
+                this.set('password', hash);
+                //this.password = hash;
                 done();
             });
         });
@@ -40,4 +41,4 @@ userSchema.pre('save', function (done) { //hook - правим нещо, пре�
     done();
 });
 
-module.exports = new mongoose.model('cube', userSchema);
+module.exports = new mongoose.model('user', userSchema);
