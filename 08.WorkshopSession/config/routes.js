@@ -14,6 +14,11 @@ module.exports = (app) => {
   app.get('/logout', checkAuth(true), userController.getLogout);
 
   app.get('/details/:id', cubeController.getCube);
+  app.get('/edit/:id', checkAuth(true), cubeController.getEditCube);
+  app.post('/edit/:id', checkAuth(true), cubeController.postEditCube);
+
+  app.get('/delete/:id', checkAuth(true), cubeController.getDeleteCube);
+  app.post('/delete/:id', checkAuth(true), cubeController.postDeleteCube);
 
   app.get('/create/accessory', checkAuth(true), accessoryController.getCreateAccessory);
   app.post('/create/accessory', checkAuth(true), accessoryController.postCreateAccessory);
