@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const config = require('../config/config');
+const saltRounds = config.saltRounds;
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -24,21 +25,22 @@ userSchema.methods.comparePasswords = function (providedPassword) {
     });
 };
 
-//при нов потребител или променена парола
 userSchema.pre('save', function (done) { //hook - правим нещо, преди да запазим потребителя
-    if (this.isNew || this.isModified('password')) {
-        bcrypt.genSalt(saltRounds, (err, salt) => { //да е arrow ф-ция, за да не губим контекста
+    const user = this;
+    //при съществуващ потребител
+    if (!user.isModified('password')) {
+        done();
+        return;
+    }
+    //при нов потребител или променена парола
+    bcrypt.genSalt(saltRounds, (err, salt) => { //да е arrow ф-ция, за да не губим контекста
+        if (err) { done(err); return; }
+        bcrypt.hash(user.password, salt, (err, hash) => {
             if (err) { done(err); return; }
-            bcrypt.hash(this.password, salt, (err, hash) => {
-                if (err) { done(err); return; }
-                this.set('password', hash);
-                //this.password = hash;
-                done();
-            });
+            user.password = hash;
+            done();
         });
-    };
-//при съществуващ потребител
-    done();
+    });
 });
 
 module.exports = new mongoose.model('user', userSchema);
