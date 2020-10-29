@@ -28,6 +28,7 @@ module.exports = {
 
             User
                 .findOne({ email })
+                .lean()
                 .then((user) => {
                     if (user) {
                         throw new Error('The given email is already in use...');
