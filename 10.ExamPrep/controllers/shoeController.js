@@ -22,12 +22,12 @@ module.exports = {
 
         details(req, res, next) {
 
-            Shoe
-                .findOne({ _id: req.params.shoeId })
-                .lean()
-                .then((shoe) => {
-                    res.render('./shoes/details.hbs', { ...shoe });
-                })
+            // Shoe
+            //     .findOne({ _id: req.params.shoeId })
+            //     .lean()
+            //     .then((shoe) => {
+                    res.render('./shoes/details.hbs'/*, { ...shoe }*/);
+                // })
         },
 
         edit(req, res, next) {
