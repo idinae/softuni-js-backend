@@ -6,3 +6,6 @@
    - слагаме всичко, без public, във view
    - папка public я слагаме на едно ниво с index.js
    - трием RESOURCES
+   - в base-layout слагаме всичко от home, без самият header (вкл. <header>: {{>header}}), footer (вкл. <footer>: {{>footer}}) и боди (без <body>, <main> и е {{{body}}})
+   - в този проект папката PUBLIC e дефолтна папка за STATIC файловете, затова навсякъде пътят към нея е без ./public, а директно /файла!!!, дори без точка!!!
+   
