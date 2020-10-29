@@ -19,3 +19,7 @@
    - в register.hbs навсякъде се добавя name="" - за да може да се взима стойността на полетата
    - оправят се атрибутите: action="/user/register" и method="POST"
    - без lean() не ми работи!!! - добавено
+5. Прави се схемата за юзера - какво ще има
+   - напр.: email, password, fullName; methods; pre
+   - колекция, към която реферираме, изглежда така: offersBought: [{ type: ObjectId, ref: "Shoe" }]
+   
