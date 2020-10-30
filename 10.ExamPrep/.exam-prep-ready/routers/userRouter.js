@@ -1,14 +1,14 @@
 const { userController } = require('../controllers');
-const { registerValidator, loginValidator } = require('../utils');
+const { registerValidator, loginValidator, isAuthNeeded } = require('../utils');
 
 module.exports = (router) => {
-    router.get('/login', userController.get.login);
-    router.get('/register', userController.get.register);
-    router.get('/profile', userController.get.profile);
-    router.get('/logout', userController.get.logout);
+    router.get('/login', isAuthNeeded(false), userController.get.login); //ф-цията се извиква, за да се върне като резултат middleware
+    router.get('/register', isAuthNeeded(false), userController.get.register);
+    router.get('/profile', isAuthNeeded(), userController.get.profile);
+    router.get('/logout', isAuthNeeded(), userController.get.logout);
 
-    router.post('/register', registerValidator, userController.post.register);
-    router.post('/login', loginValidator, userController.post.login);
+    router.post('/register', isAuthNeeded(false), registerValidator, userController.post.register);
+    router.post('/login', isAuthNeeded(false), loginValidator, userController.post.login);
 
     return router;
 };
