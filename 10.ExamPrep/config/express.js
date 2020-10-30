@@ -1,6 +1,6 @@
 const handlebars = require('express-handlebars');
 const cookieParser = require('cookie-parser');
-//const { auth } = require('../utils');
+const { auth } = require('../utils');
 
 module.exports = (express, app) => {
     app.use(express.static('public'));
@@ -9,7 +9,7 @@ module.exports = (express, app) => {
 
     app.use(cookieParser());
 
-   // app.use(auth);
+    app.use(auth); //ф-цията е важно да е тук!!! между cookieParser и app.engine
 
     app.engine('hbs', handlebars({
         layoutsDir: 'views',

@@ -29,3 +29,8 @@
    - routers/userRouter: get и post login, които се взимат от контролера
    - controllers/userController: функциите get и post login
    ! за тест може само да принтираме данните от формата: console.log(req.body)
+6. CREATE
+   - оправяме .hbs
+   - routers/shoeRouter
+   - config/routes
+   - controllers/shoeController
