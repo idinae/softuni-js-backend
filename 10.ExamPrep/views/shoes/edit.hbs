@@ -1,22 +1,22 @@
 <h1>Edit Offer</h1>
 <p class="message"></p>
-<form action="" method="">
+<form action="/shoes/edit/{{_id}}" method="POST">
     <div>
-        <input type="text" name="" placeholder="Name..." value="Under Armour HOVR">
+        <input type="text" name="name" placeholder="Name..." value="{{name}}">
     </div>
     <div>
-        <input type="text" name="" placeholder="Price..." value="$149.99">
+        <input type="text" name="price" placeholder="Price..." value="${{price}}">
     </div>
     <div>
-        <input type="text" name="" placeholder="Image url..."
-            value="https://i1.t4s.cz/products/3023295-602/under-armour-ua-w-hovr-phantom-se-trek-263676-3023295-603.jpg">
+        <input type="text" name="imageUrl" placeholder="Image url..."
+            value="{{imageUrl}}">
     </div>
     <div>
-        <textarea name=""
-            placeholder="Give us some description about this offer...">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis explicabo voluptatibus odio? Deleniti amet qui tenetur ipsa enim blanditiis laboriosam distinctio, dignissimos cupiditate, delectus autem. Explicabo exercitationem voluptatibus reprehenderit repellat. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore reiciendis maiores aliquid nobis, accusantium dolore iste ipsa atque deserunt corrupti maxime, alias neque libero temporibus expedita magni perferendis aut nostrum.</textarea>
+        <textarea name="description"
+            placeholder="Give us some description about this offer...">{{description}}</textarea>
     </div>
     <div>
-        <input type="text" name="" placeholder="Brand..." value="Under Armour">
+        <input type="text" name="brand" placeholder="Brand..." value="{{brand}}">
     </div>
     <div>
         <button>Edit</button>

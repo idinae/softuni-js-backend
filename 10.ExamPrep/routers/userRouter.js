@@ -1,4 +1,5 @@
 const { userController } = require('../controllers');
+const { registerValidator } = require('../utils');
 
 module.exports = (router) => {
     router.get('/login', userController.get.login);

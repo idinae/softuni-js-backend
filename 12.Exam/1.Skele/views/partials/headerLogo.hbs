@@ -1,5 +1,11 @@
 <li>
-    <a href="">
+    {{#if isLoggedIn}}
+    <a href="/shoes/all">
         <img src="/sneakers.png" alt="">
     </a>
+    {{else}}
+    <a href="/home/">
+        <img src="/sneakers.png" alt="">
+    </a>
+    {{/if}}
 </li>

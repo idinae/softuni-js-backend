@@ -9,9 +9,7 @@ module.exports = {
                 .lean()
                 .then((shoes) => {
                     console.log(shoes);
-                    res.render('./shoes/shoes.hbs', {
-                        shoes
-                    });
+                    res.render('./shoes/shoes.hbs', { shoes });
                 })
                 .catch((e) => console.log(e));
         },
@@ -21,12 +19,11 @@ module.exports = {
         },
 
         details(req, res, next) {
-
             Shoe
                 .findOne({ _id: req.params.shoeId })
                 .lean()
                 .then((shoe) => {
-                    res.render('./shoes/details.hbs'/*, { ...shoe }*/);
+                    res.render('./shoes/details.hbs', { ...shoe });
                 })
         },
 

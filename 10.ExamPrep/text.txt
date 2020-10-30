@@ -34,3 +34,15 @@
    - routers/shoeRouter
    - config/routes
    - controllers/shoeController
+   - прави се views/partial/shoe, където се слага инфото за една shoe и се прави на partial {{name}}, {{imageUrl}}...
+   - във views/shoes остава остовната част от страницата, в която ще се зареждат паршълите - {{>shoe}}: {{#each shoes}}
+7. DETAILS
+   - partials/shoe.hbs - оправяме адреса, който води към details - взима {{_id}}
+   - shoes/details - {{name}}, {{imageUrl}}...
+   - shoeRouter
+   - shoeController
+   - прави се проверка дали артикулът е публикуван от юзъра
+8. EDIT & DELETE
+   - routers/shoeRouter: /edit/:shoeId, /delete/:shoeId
+   - оправя се .hbs - добавят се action="/shoes/edit/{{_id}}", method="POST" и value: {{name}}, {{price}}..., за да се заредят данните!!!
+9. Проверка на repeatPASSWORD
