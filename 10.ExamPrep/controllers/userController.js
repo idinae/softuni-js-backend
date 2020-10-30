@@ -24,7 +24,7 @@ module.exports = {
     post: {
         register(req, res, next) {
 
-            const { email, fullName, password } = { ...req.body };
+            const { email, fullName, password } = { ...req.body }; //деструктурира се req.body, за да дойде във формат на обект
 
             User
                 .findOne({ email })

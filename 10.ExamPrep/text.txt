@@ -1,7 +1,7 @@
 ! Ако реферираме към index в някоя папка, може да изпуснем името на файла - по дефолт първо се търси index
 
 1. Тестваме сървъра и рутирането
-   - Взимаме скелето
+   - взимаме скелето
    - npm i
    - npx nodemon start (вместо Ctr+F5)
 2. Слагаме ресурсите в папка RESOURCES
@@ -21,7 +21,11 @@
    - в register.hbs навсякъде се добавя name="" - за да може да се взима стойността на полетата
    - оправят се атрибутите: action="/user/register" и method="POST"
    - без lean() не ми работи!!! - добавено
-5. Прави се схемата за юзера - какво ще има
+   - Прави се схемата за юзера - какво ще има
    - напр.: email, password, fullName; methods; pre
    - колекция, към която реферираме, изглежда така: offersBought: [{ type: ObjectId, ref: "Shoe" }]
-   
+5. USER
+   - преглежда се .hbs файла: name="name", action="/user/login", method="POST", a href="/user/register"
+   - routers/userRouter: get и post login, които се взимат от контролера
+   - controllers/userController: функциите get и post login
+   ! за тест може само да принтираме данните от формата: console.log(req.body)

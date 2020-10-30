@@ -33,6 +33,7 @@ module.exports = (mongoose, bcrypt) => {
         }
     }; 
 
+    //hash на паролата преди записване в базата
     userSchema.pre('save', function (next) {
 
         if (!this.isModified('password')) {
@@ -52,9 +53,9 @@ module.exports = (mongoose, bcrypt) => {
                 }
                 this.password = hash;
                 next();
-            })
-        })
-    })
+            });
+        });
+    });
 
     return Model('User', userSchema);
 };
