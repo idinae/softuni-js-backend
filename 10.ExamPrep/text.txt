@@ -47,3 +47,4 @@
    - оправя се .hbs - добавят се action="/shoes/edit/{{_id}}", method="POST" и value: {{name}}, {{price}}..., за да се заредят данните!!!
 9. Проверка на repeatPASSWORD
    - добавяме registerValidator - използва библиотеката на експрес за валидиране
+   - добавяме loginValidator
