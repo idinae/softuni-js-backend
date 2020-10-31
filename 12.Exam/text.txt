@@ -1,8 +1,34 @@
-[ ] Вдига се сървър и се тества рутирането
+[ ] ПОДГОТОВКА
+    - целта е да се вдигне сървър и да се тества рутирането "на сухо"
     - взима се скелето
     - npm i
     - npm start или npx nodemon start
     - тества се рутирането: /, /register, /login, /create --> папка views/test
     - изсипват се файловете на задачата в static/css и views
     - чете се внимателно условието
-[ ] 
+[ ] VIEWS 
+    - целта е да се зареждат правилно: home, login, register
+    - логнат / нелогнат хващаме разликите -> по-пълното отива в home.hbs
+    - header, footer, notification* отиват в съотв. partials *ползва {{message}} от validatorRegister
+    - login и register (без <main></main>) отиват в съотв. hbs
+    - оправяме пътищата (href) в навигацията; ако има <a> без href, добавяме, напр. href="/"
+[ ] REGISTER
+    - register.hbs: action="/register" method="POST", name="" -> отива в req.body
+    - routes/auth: добавяме заявка get и съотв. milddleware ф-ция
+    - в header.hbs добавяме условието: {{#if isLoggedIn}}{{else}}{{/if}}
+    - в header.hbs добавяме notification: {{#if message}}{{>notification}}{{/if}}
+    - правим POST заявката: routes/auth: ползва async ф-цията controllers/user/saveUser()
+    - проверка в mongoDB и в Application/cookies за token
+    - валидацията: в controllers/validatorRegister: иментата идват от съотв. hbs, гледаме условията на задачата, добавяме още, оправяме regex-a...
+    - в routers/auth добавяме валидацията - като middleware, преди заявката към сървъра
+[ ] LOGIN
+    - login.hbs: action="/login" method="POST", name=""
+    - валидацията: в controllers/validatorLogin: добавяме още, оправяме regex-a...
+    - routes/auth: добавяме get и post заявките
+    - проверка на рутирането при логнат потребител - да не достъпва отново login/register (middleware checkGestAccess)
+[ ] LOGOUT
+    - трием cookie-то
+    - редирект ('/' или друго, ако е казано)
+[ ] HOME LOGGED/GUEST
+    - след като login работи, връщаме се да оправим home - какво вижда логнат потребител / гост
+    - на първо време добавяме и двете едно под друго, оправяме пътищата
