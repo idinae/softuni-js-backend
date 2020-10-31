@@ -19,7 +19,7 @@ const saveUser = async (req, res) => {
         //email,
         password: hash,
         likedItems: []
-    })
+    });
 
     try {
         const userObject = await user.save();
@@ -35,7 +35,7 @@ const saveUser = async (req, res) => {
         return res.redirect('/register');
     }
 
-}
+};
 
 const verifyUser = async (req, res) => {
     const { username, /* email, */ password } = req.body;

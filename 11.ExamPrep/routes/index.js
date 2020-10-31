@@ -10,18 +10,6 @@ router.get('/', getUserStatus, async (req, res) => {
     res.render('home', { isLoggedIn:  req.isLoggedIn });    
 });
 
-router.get('/login', getUserStatus, async (req, res) => { 
-    res.render('login', { isLoggedIn:  req.isLoggedIn });    
-});
-
-router.get('/register', getUserStatus, async (req, res) => { 
-    res.render('register', { isLoggedIn:  req.isLoggedIn });    
-});
-
-router.get('/logout', getUserStatus, async (req, res) => { 
-    res.render('home', { isLoggedIn:  req.isLoggedIn });    
-});
-
 router.get('/create', getUserStatus, async (req, res) => { 
     res.render('create', { isLoggedIn:  req.isLoggedIn });    
 });
