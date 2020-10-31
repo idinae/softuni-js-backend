@@ -5,4 +5,9 @@
     - тества се рутирането: /, /register, /login, /create --> папка views/test
     - изсипват се файловете на задачата в static/css и views
     - чете се внимателно условието
-[ ] 
+[ ] VIEWS
+    - логнат / нелогнат хващаме разликите -> по-пълното отива в home.hbs
+    - header, footer, notification отиват в съотв. partials
+    - login и register (без <main></main>) отиват в съотв. hbs
+    - оправяме пътищата (href) в навигацията; ако има <a> без href, добавяме, напр. href="/"
+    - 

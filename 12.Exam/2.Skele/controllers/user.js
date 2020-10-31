@@ -10,12 +10,13 @@ const generateToken = data => {
 }
 
 const saveUser = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, /*email,*/ password } = req.body;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
     const user = new User({
         username,
+        //email,
         password: hash,
         likedItems: []
     })
@@ -24,6 +25,7 @@ const saveUser = async (req, res) => {
         const userObject = await user.save();
         const token = generateToken({
             userID: userObject._id,
+            //email: userObject.email,
             username: userObject.username
         })
         res.cookie('aid', token);
@@ -36,7 +38,7 @@ const saveUser = async (req, res) => {
 }
 
 const verifyUser = async (req, res) => {
-    const { username, password } = req.body;
+    const { username, /* email, */ password } = req.body;
     const user = await User.findOne( { username }); 
     if ( !user ) { return false }
     
@@ -44,6 +46,7 @@ const verifyUser = async (req, res) => {
     if (status) {  
         const token = generateToken({
             userID: user._id,
+            //email: user.email,
             username: user.username
         });  
         res.cookie('aid', token);
@@ -64,7 +67,6 @@ const getUserStatus =  (req, res, next) => {
         req.isLoggedIn = false;
     }
     next()
-
 }
 
 const checkGestAccess = (req, res, next)=> {
@@ -89,10 +91,7 @@ const checkAuthentication = async (req, res, next) => {
     } catch(e) {
         return res.redirect('/login');
     }
-
 }
-
-
 
 module.exports = {
     saveUser,
