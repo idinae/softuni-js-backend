@@ -22,7 +22,7 @@ module.exports = (mongoose, bcrypt) => {
         offersBought: [
             {
                 type: ObjectId,
-                ref: "Shoe"
+                ref: "Item"
             }
         ]
     });
