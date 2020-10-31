@@ -6,17 +6,58 @@ const validationLogin = require('../controllers/validationLogin');
 
 const router = Router();
 
+//**GET**//
+
+//LOGIN
 router.get('/login', checkGestAccess, getUserStatus, (req,res) => {
     res.render('login', { isLoggedIn: req.isLoggedIn })
 });
 
-router.get('/register', getUserStatus, (req,res) => {
+//REGISTER
+router.get('/register', checkGestAccess, getUserStatus, (req,res) => {
     res.render('register', { isLoggedIn: req.isLoggedIn })
 });
 
-router.get('/logout', getUserStatus, async (req, res) => { 
-    res.render('home', { isLoggedIn:  req.isLoggedIn });    
+//LOGOUT
+router.get('/logout', async (req, res) => { 
+    res.clearCookie('aid');
+    res.redirect('/');  
 });
 
+//**POST**//
+
+//REGISTER
+router.post('/register', validationRegister, async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.render('register', { //return, за да не продължава после надолу
+            message: errors.array()[0].msg //така взимаме съобщението от message на грешката
+        });
+    }
+    
+    try {
+        await saveUser(req, res); //викаме ф-цията с параметрите, които иска
+        res.redirect('/'); //ако е успешно, редиректва към home
+    } catch(e) {
+        console.error(e);
+        res.redirect('/register');
+    }
+});
+
+//LOGIN
+router.post('/login', validationLogin, async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.render('login', { //return, за да не продължава после надолу
+            message: errors.array()[0].msg //така взимаме съобщението от message на грешката
+        });
+    }
+    
+        const status = await verifyUser(req, res);
+        if (status) {
+            return res.redirect('/');
+        }
+        res.render('login', { message: 'Wrong username or password!' });
+});
 
 module.exports = router;
