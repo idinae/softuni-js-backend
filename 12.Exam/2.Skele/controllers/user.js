@@ -17,7 +17,7 @@ const saveUser = async (req, res) => {
     const user = new User({
         username,
         password: hash,
-        likedPlays: []
+        likedItems: []
     })
 
     try {

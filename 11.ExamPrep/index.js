@@ -9,7 +9,8 @@ const mongoose = require('mongoose');
 mongoose.connect(config.databaseUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useFindAndModify: false
+        useFindAndModify: false,
+        useCreateIndex: true
     }, (err) => {
         if (err) {
             console.error(err);
@@ -23,4 +24,4 @@ app.use('/', autRouter);
 
 app.use('/', indexRouter);
 
-app.listen(config.port, console.log(`Listening on port ${config.port}! Now its up to you...`));
+app.listen(config.port, console.log(`Server listening on port ${config.port}!`));

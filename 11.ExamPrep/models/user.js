@@ -6,14 +6,19 @@ const UserShcema = new mongoose.Schema({
         required: true
     },
 
+    // email: {
+    //     type: String,
+    //     required: true
+    // },
+
     password: {
         type: String,
         required: true
     },
 
-    likedPlays: [{
+    likedItems: [{
         type: 'ObjectId',
-        ref: 'Play'
+        ref: 'Item'
     }]
 
 })
