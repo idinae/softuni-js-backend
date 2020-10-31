@@ -1,0 +1,20 @@
+<header>
+    <nav>
+        <ul>
+            {{#if isLoggedIn}}
+            <li>
+                <a href="/items/create">Create new item</a>
+            </li>
+            {{>headerLogo}}
+            <li>
+                <a href="/user/profile">Welcome, {{fullName}}</a> |
+                <a href="/user/logout">Logout</a>
+            </li>
+            {{else}}
+            <li class="site-logo">Item</li>
+            {{>headerLogo}}
+            <li class="site-logo">Shelf</li>
+            {{/if}}
+        </ul>
+    </nav>
+</header>

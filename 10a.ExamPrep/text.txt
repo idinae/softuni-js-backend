@@ -1,0 +1,50 @@
+! Ако реферираме към index в някоя папка, може да изпуснем името на файла - по дефолт първо се търси index
+
+1. Тестваме сървъра и рутирането
+   - взимаме скелето
+   - npm i
+   - npx nodemon start (вместо Ctr+F5)
+2. Слагаме ресурсите в папка RESOURCES
+   - слагаме всичко, без public/static, във view
+   - папка public/static я слагаме на едно ниво с index.js
+   - трием RESOURCES
+   - в base-layout слагаме всичко от home, без самият header (вкл. <header>: {{>header}}), footer (вкл. <footer>: {{>footer}}) и боди (без <body>, <main> и е {{{body}}})
+   - в този проект папката STATIC e дефолтна папка за PUBLIC/STATIC файловете, затова навсякъде пътят към нея е без ./public, а директно /файла!!!, без точка - иначе стиловете не работят!!!
+   - коригират се пътищата, ако не намира стиловете или някои от картинките
+   - преглеждат се всички view-та и се тестват пътищата към тях, дали страницата се рендерира, напр.: create(req, res, next) {res.render('./shoes/create.hbs');}
+3. Добавят се нови route-ове, напр. shoueRouter
+   - всеки от тях се добавя и в routers/index.js - require & export
+   - за всеки нов router се добавя и контролер, поне файла на първо време
+   - контролерът експортва обект в функции, които са тип middleware
+   - route-овете се добавят и в config/routes.js
+4. Почваме с REGISTER
+   - в register.hbs навсякъде се добавя name="" - за да може да се взима стойността на полетата
+   - оправят се атрибутите: action="/user/register" и method="POST"
+   - без lean() не ми работи!!! - добавено
+   - Прави се схемата за юзера - какво ще има
+   - напр.: email, password, fullName; methods; pre
+   - колекция, към която реферираме, изглежда така: offersBought: [{ type: ObjectId, ref: "Shoe" }]
+5. USER
+   - преглежда се .hbs файла: name="name", action="/user/login", method="POST", a href="/user/register"
+   - routers/userRouter: get и post login, които се взимат от контролера
+   - controllers/userController: функциите get и post login
+   ! за тест може само да принтираме данните от формата: console.log(req.body)
+6. CREATE
+   - оправяме .hbs
+   - routers/shoeRouter
+   - config/routes
+   - controllers/shoeController
+   - прави се views/partial/shoe, където се слага инфото за една shoe и се прави на partial {{name}}, {{imageUrl}}...
+   - във views/shoes остава остовната част от страницата, в която ще се зареждат паршълите - {{>shoe}}: {{#each shoes}}
+7. DETAILS
+   - partials/shoe.hbs - оправяме адреса, който води към details - взима {{_id}}
+   - shoes/details - {{name}}, {{imageUrl}}...
+   - shoeRouter
+   - shoeController
+   - прави се проверка дали артикулът е публикуван от юзъра
+8. EDIT & DELETE
+   - routers/shoeRouter: /edit/:shoeId, /delete/:shoeId
+   - оправя се .hbs - добавят се action="/shoes/edit/{{_id}}", method="POST" и value: {{name}}, {{price}}..., за да се заредят данните!!!
+9. Проверка на repeatPASSWORD
+   - добавяме registerValidator - използва библиотеката на експрес за валидиране
+   - добавяме loginValidator
