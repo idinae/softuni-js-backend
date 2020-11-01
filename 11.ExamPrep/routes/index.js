@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const { validationResult } = require('express-validator');
-const { getUserStatus, checkAuthentication } = require('../controllers/user'); //от getUserStatus идва isLoggedIn
+const { getUserStatus, checkAuthentication } = require('../controllers/user'); //от getUserStatus идва isLoggedIn; от checkAuthentication идва юзъра
 const validation = require('../controllers/validation');
 const Item = require('../models/item');
-const { sortByLikes, sortByDate } = require('../controllers/item');
+const { sortByLikes, sortByDate, getItem } = require('../controllers/item');
 
 const router = Router();
 
@@ -61,27 +61,79 @@ router.post('/create', checkAuthentication, validation, async (req, res) => { //
 
 });
 
+//DETAILS
+router.get('/details/:id', checkAuthentication, getUserStatus, async (req, res) => {
+    const id = req.params.id;
+    try {
+    const item = await getItem(id);
+    const isCreator = item.creator.toString() === req.user._id.toString();
+    const isLiked = item.usersLiked.filter(x => x.toString() === req.user._id.toString());
+    res.render('details', { 
+        isLoggedIn: req.isLoggedIn,
+        isLiked,
+        isCreator,
+        ...item
+     });
+    } catch(e) {
+        console.error(e);
+        res.redirect('/');
+    }
+});
 
-// router.get('/details/:itemId', getUserStatus, async (req, res) => { 
-//     res.render('details', { isLoggedIn:  req.isLoggedIn });    
-// });
+//LIKES
+router.get('/like/:id', checkAuthentication, async (req, res) => {
+    const itemId = req.params.id;
+    const { _id } = req.user; //user идва от checkAuthentication
+    
+    try {
+    await Item.findByIdAndUpdate(itemId , {
+        $addToSet: {    //adds a value to an array unless the value is already present
+            usersLiked: [_id]
+        }
+    });
+    res.redirect(`/details/${itemId}`);
 
-// router.get('/edit/:itemId', getUserStatus, async (req, res) => { 
-//     res.render('edit', { isLoggedIn:  req.isLoggedIn });    
-// });
+    } catch(e) {
+        console.error(e);
+        res.redirect('/');
+    }
+});
 
-// router.get('/delete/:itemId', getUserStatus, async (req, res) => { 
-//     res.render('/', { isLoggedIn:  req.isLoggedIn });    
-// });
+//UPDATE
 
+//GET
+router.get('/edit/:id', getUserStatus, async (req, res) => {
+    const id = req.params.id;
+    try {
+    const item = await getItem(id);
+    console.log(item);
+    
+    res.render('edit', { 
+        isLoggedIn:  req.isLoggedIn,
+        ...item
+    });
+    } catch(e) {
+        console.error(e);
+        res.redirect(`/edit/${id}`);
+    }
+});
 
-// router.post('/create', getUserStatus, async (req, res) => { 
-//     res.render('create', { isLoggedIn:  req.isLoggedIn });    
-// });
-
+//POST
 // router.post('/edit/:itemId', getUserStatus, async (req, res) => { 
 //     res.render('edit', { isLoggedIn:  req.isLoggedIn });    
 // });
 
+
+//DELETE
+router.get('/delete/:id', getUserStatus, async (req, res) => {
+    const itemId = req.params.id;
+    try {
+    await Item.deleteOne({ _id: itemId } );
+    res.redirect('/');
+    } catch(e) {
+        console.error(e);
+        res.redirect(`/details/${itemId}`);
+    }
+});
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const Item = require('../models/item');
 
+//HOME - ползва долните!
 const getAllItems = async (callback) => { 
     const item = await Item.find().lean();
     return item;
@@ -22,8 +23,19 @@ const sortByDate = async () => {
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 };
 
+//DETAIS - взимане на item по id
+const getItem = async (id) => {
+    const item = await Item.findById(id).lean();
+    return item;
+}
+
+//EDIT
+
+
+
 module.exports = {
     getAllItems,
     sortByLikes,
-    sortByDate
+    sortByDate,
+    getItem
 }
