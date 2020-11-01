@@ -32,3 +32,38 @@
 [ ] HOME LOGGED/GUEST
     - след като login работи, връщаме се да оправим home - какво вижда логнат потребител / гост
     - на първо време добавяме и двете едно под друго, оправяме пътищата
+    - от повтарящите се неща оставяме по едно за всяко
+    - за сортирането също добавяме на линковете пътища: /sortDate, /sortLikes
+    - правим го с {{#if isLoggedIn}} {{else}} {{/if}}
+    - с втори вложен {{#if}} {{/if}} слагаме съобщението ако нямаме създадени пиеси --> после!!!
+[ ] CREATE
+    - create.hbs - в него слагаме формата от create.html и оправяме action="/create" method="POST"; name="..."
+    - routes/index - get заявка create, ползваме и getUserStatus (оттук идва isLoggedIn) -> тестваме с бутона
+    - models/item - взимаме нужните полета от заданието и ги създаваме в модела
+    - routes/index - създаваме post заявката:
+      -- взимаме си елементите от формата за create - от req.body
+      -- взимаме user-а; нямаме го в req.body, но го взимаме с middleware checkAuthentication (req.user) -> слагаме да се ползва
+      -- console.log-ваме нещата, за да видим какво излиза
+      -- ако имаме check-box -> излиза ни "on", а трябва булева!!!
+      -- usersLiked не го взимаме на този етап, ще дойде после!!!
+      -- записваме с await item.save() и гледаме в db-то
+      -- добавяме try()-catch() на цялото 
+    - валидация -> controllers/validation; 
+      -- гледаме условието кои полета не може да са празни (title, description, umageUrl тук) - допълваме
+      -- ползваме validationResult(res) - добавяме го същото, както при юзъра, заедно с middleware validation
+[ ] HOME според LOGGED / GUEST
+    - routes/index/get '/' - добавяме ф-ции за сортиране по лайкове и по дата
+    - отиваме в controllers/item и добавяме ф-циите - async, arrow
+    - views/home - добавяме сортировки по вид на юзъра: {{#each itemsGuest}}
+    - оправяме да взима пиесата от базата
+[ ] DETAILS
+    - добавяме /details/{{_id}} в home.hbs
+    - правим details.hbs
+    - в controllers/item създаваме async функция getPlay за теглене от базата по id
+    - routes/index добавяме рутиране, като ползваме getPlay (за findById), checkAuthentication (за _id на юзъра), getUserStatus (за isLoggedIn)
+[ ] LIKES
+    - в controllers/item създаваме async функция
+    - routes/index добавяме рутиране, като ползваме checkAuthentication
+[ ] UPDATE
+    - правим edit.hbs
+    - добавяме рутирането и ф-цията

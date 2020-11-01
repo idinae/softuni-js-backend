@@ -66,4 +66,4 @@
     - routes/index добавяме рутиране, като ползваме checkAuthentication
 [ ] UPDATE
     - правим edit.hbs
-    - 
+    - добавяме рутирането и ф-цията

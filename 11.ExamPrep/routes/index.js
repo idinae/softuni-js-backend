@@ -103,25 +103,57 @@ router.get('/like/:id', checkAuthentication, async (req, res) => {
 
 //GET
 router.get('/edit/:id', getUserStatus, async (req, res) => {
-    const id = req.params.id;
+    const itemId = req.params.id;
     try {
-    const item = await getItem(id);
-    console.log(item);
-    
+    const item = await getItem(itemId);
     res.render('edit', { 
         isLoggedIn:  req.isLoggedIn,
         ...item
     });
     } catch(e) {
         console.error(e);
-        res.redirect(`/edit/${id}`);
+        res.redirect(`/edit/${itemId}`);
     }
 });
 
 //POST
-// router.post('/edit/:itemId', getUserStatus, async (req, res) => { 
-//     res.render('edit', { isLoggedIn:  req.isLoggedIn });    
-// });
+router.post('/edit/:id', checkAuthentication, getUserStatus, validation, async (req, res) => { 
+    const itemId = req.params.id;
+    const item = await getItem(itemId);
+    //валидация
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.render('edit', { //return, за да не продължава после надолу
+            isLoggedIn:  req.isLoggedIn,
+            ...item,
+            message: errors.array()[0].msg //така взимаме съобщението от message на грешката
+        });
+    }
+    //запис в базата
+    try {
+        const { title, description, imageUrl, isPublic } = req.body;
+        const { _id } = req.user;
+        const createdAt = new Date().toLocaleDateString();
+        const item = {
+            title,
+            description,
+            imageUrl,
+            isPublic: isPublic === 'on' ? true : false,
+            createdAt,
+            creator: _id
+        };
+        
+        await Item.findByIdAndUpdate( 
+            itemId,
+            { ...item }
+        );
+        res.redirect('/');
+    } catch (e) {
+        console.error(e);
+        res.redirect('/');
+    }
+
+});
 
 
 //DELETE
