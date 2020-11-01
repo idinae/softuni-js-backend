@@ -30,21 +30,15 @@ router.get('/create', getUserStatus, (req, res) => {
 router.post('/create', checkAuthentication, validation, async (req, res) => { // async (req, res) - тук async е нужно!!!
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.render('create', { //return, за да не продължава после надолу
-            message: errors.array()[0].msg //така взимаме съобщението от message на грешката
+        return res.render('create', { 
+            message: errors.array()[0].msg 
         });
     }
     
     try {
-        //взимаме си елементите от формата за create - от req.body
         const { title, description, imageUrl, duration } = req.body;
-        //взимаме user-а; взимаме го с middleware checkAuthentication (req.user) -> слагаме да се ползва
         const { _id } = req.user;
-        //създаваме си дата и я обръщаме на стринг (има и други в-ве дати)
         const createdAt = new Date().toLocaleDateString();
-        //тестваме какво има в обекта item
-        //console.log(title, description, imageUrl, isPublic === 'on' ? true : false);
-        //създаваме си нов обект с всичко това
         const item = new Item({
             title,
             description,
@@ -65,13 +59,14 @@ router.post('/create', checkAuthentication, validation, async (req, res) => { //
 //DETAILS
 router.get('/details/:id', checkAuthentication, getUserStatus, async (req, res) => {
     const id = req.params.id;
+    
     try {
     const item = await getItem(id);
     const isCreator = item.creator.toString() === req.user._id.toString();
-    const isLiked = item.usersLiked.filter(x => x.toString() === req.user._id.toString());
+    //const enrolled = item.usersLiked.filter(x => x.toString() === req.user._id.toString());
     res.render('details', { 
         isLoggedIn: req.isLoggedIn,
-        isLiked,
+        //isLiked,
         isCreator,
         ...item
      });
@@ -81,15 +76,15 @@ router.get('/details/:id', checkAuthentication, getUserStatus, async (req, res) 
     }
 });
 
-//LIKES
-router.get('/like/:id', checkAuthentication, async (req, res) => {
+//ENROLL
+router.get('/enroll/:id', checkAuthentication, async (req, res) => {
     const itemId = req.params.id;
     const { _id } = req.user; //user идва от checkAuthentication
     
     try {
     await Item.findByIdAndUpdate(itemId , {
         $addToSet: {    //adds a value to an array unless the value is already present
-            usersLiked: [_id]
+            enrolled: [_id]
         }
     });
     res.redirect(`/details/${itemId}`);
@@ -132,14 +127,14 @@ router.post('/edit/:id', checkAuthentication, getUserStatus, validation, async (
     }
     //запис в базата
     try {
-        const { title, description, imageUrl, isPublic } = req.body;
+        const { title, description, imageUrl, duration } = req.body;
         const { _id } = req.user;
         const createdAt = new Date().toLocaleDateString();
         const item = {
             title,
             description,
             imageUrl,
-            isPublic: isPublic === 'on' ? true : false,
+            duration,
             createdAt,
             creator: _id
         };

@@ -11,7 +11,7 @@ const UserShcema = new mongoose.Schema({
         required: true
     },
 
-    enrolledCourses: [{
+    enrolled: [{
         type: 'ObjectId',
         ref: 'Item'
     }]

@@ -52,19 +52,19 @@
     - валидация -> controllers/validation; 
       -- гледаме условието кои полета не може да са празни (title, description, umageUrl тук) - допълваме
       -- ползваме validationResult(res) - добавяме го същото, както при юзъра, заедно с middleware validation
-[ ] HOME според LOGGED / GUEST
+[x] HOME според LOGGED / GUEST
     - routes/index/get '/' - добавяме ф-ции за сортиране по лайкове и по дата
     - отиваме в controllers/item и добавяме ф-циите - async, arrow
     - views/home - добавяме сортировки по вид на юзъра: {{#each itemsGuest}}
     - оправяме да взима пиесата от базата
-[ ] DETAILS
+[x] DETAILS
     - добавяме /details/{{_id}} в home.hbs
     - правим details.hbs
     - в controllers/item създаваме async функция getPlay за теглене от базата по id
     - routes/index добавяме рутиране, като ползваме getPlay (за findById), checkAuthentication (за _id на юзъра), getUserStatus (за isLoggedIn)
-[ ] LIKES
+[ ] ENROLLED
     - в controllers/item създаваме async функция
     - routes/index добавяме рутиране, като ползваме checkAuthentication
-[ ] UPDATE
+[x] UPDATE
     - правим edit.hbs
     - добавяме рутирането и ф-цията
