@@ -10,15 +10,14 @@ const generateToken = data => {
 }
 
 const saveUser = async (req, res) => {
-    const { username, /*email,*/ password } = req.body;
+    const { username, password } = req.body;
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
     const user = new User({
         username,
-        //email,
         password: hash,
-        likedItems: []
+        enrolledCourses: []
     })
 
     try {
@@ -46,12 +45,11 @@ const verifyUser = async (req, res) => {
     if (status) {  
         const token = generateToken({
             userID: user._id,
-            //email: user.email,
             username: user.username
         });  
         res.cookie('aid', token);
     } 
-    return status; 
+    return { status, username }; 
 }
 
 const getUserStatus =  (req, res, next) => {

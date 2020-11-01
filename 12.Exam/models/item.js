@@ -17,15 +17,15 @@ const ItemSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    isPublic: {
-        type: Boolean,
-        default: false
+    duration: {
+        type: String,
+        required: true,
     },
     createdAt: {
         type: Date,
         required: true
     },
-    usersLiked: [{
+    enrolled: [{
         type: ObjectId,
         ref: "User"
     }],
@@ -33,23 +33,6 @@ const ItemSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "User"
     }
-
-    // price: {
-    //     type: Number,
-    //     required: true,
-    // },
-    // brand: {
-    //     type: String,
-    //     required: true,
-    // },
-    // salesman: {
-    //     type: ObjectId,
-    //     required: true
-    // },
-    // buyers: [{
-    //     type: ObjectId,
-    //     ref: "User"
-    // }]
 });
 
 module.exports = mongoose.model('Item', ItemSchema);

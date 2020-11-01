@@ -3,20 +3,15 @@ const UserShcema = new mongoose.Schema({
 
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
-
-    // email: {
-    //     type: String,
-    //     required: true
-    // },
-
     password: {
         type: String,
         required: true
     },
 
-    likedItems: [{
+    enrolledCourses: [{
         type: 'ObjectId',
         ref: 'Item'
     }]
