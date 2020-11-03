@@ -12,6 +12,7 @@ router.get('/', getUserStatus, /*checkAuthentication, */async (req, res) => {
    // const { username } = req.user;
         const itemsGuest = await sortByEnrolled();
         const itemsLogged = await sortByDate();
+    //console.log(req.body.user);
 
     res.render('home', { 
         isLoggedIn: req.isLoggedIn,
@@ -27,7 +28,7 @@ router.get('/create', getUserStatus, (req, res) => {
     res.render('create', { isLoggedIn: req.isLoggedIn });
 });
 //POST
-router.post('/create', checkAuthentication, validation, async (req, res) => { // async (req, res) - тук async е нужно!!!
+router.post('/create', checkAuthentication, validation, async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.render('create', { 
@@ -63,10 +64,10 @@ router.get('/details/:id', checkAuthentication, getUserStatus, async (req, res) 
     try {
     const item = await getItem(id);
     const isCreator = item.creator.toString() === req.user._id.toString();
-    //const enrolled = item.usersLiked.filter(x => x.toString() === req.user._id.toString());
+    const isEnrolled = item.enrolled.filter(x => x.toString() === req.user._id.toString());
     res.render('details', { 
         isLoggedIn: req.isLoggedIn,
-        //isLiked,
+        isEnrolled,
         isCreator,
         ...item
      });

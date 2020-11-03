@@ -62,7 +62,7 @@
     - правим details.hbs
     - в controllers/item създаваме async функция getPlay за теглене от базата по id
     - routes/index добавяме рутиране, като ползваме getPlay (за findById), checkAuthentication (за _id на юзъра), getUserStatus (за isLoggedIn)
-[ ] ENROLLED
+[x] ENROLLED
     - в controllers/item създаваме async функция
     - routes/index добавяме рутиране, като ползваме checkAuthentication
 [x] UPDATE
